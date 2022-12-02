@@ -1,5 +1,5 @@
 How to run the program:
-1. Extract 'javafx-sdk-17.0.2.zip' and 'jackson_jar_files.zip' and put them into your C Drive.
+1. Extract 'javafx-sdk-17.0.2.zip' and put them into your C Drive.
 2. Open the folder named "RoundRobin" in Visual Studio Code.
 
 If there are no external libraries imported automatically please follow Step 3:
