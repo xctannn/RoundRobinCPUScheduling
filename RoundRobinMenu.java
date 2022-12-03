@@ -45,17 +45,20 @@ public class RoundRobinMenu extends Application{
         TableColumn<Process, String> pArrivalTime = new TableColumn<>("Arrival Time");
         pArrivalTime.setCellValueFactory(new PropertyValueFactory<>("arrivalTime"));
         TableColumn<Process, String> pBurstTime = new TableColumn<>("Burst Time");
-        pBurstTime.setCellValueFactory(new PropertyValueFactory<>("burstTime"));
-        processInputTable.getColumns().addAll(Arrays.asList(pName, pArrivalTime, pBurstTime));
-        // formatting
+        pBurstTime.setCellValueFactory(new PropertyValueFactory<>("priority"));
+        TableColumn<Process, String> pPriority = new TableColumn<>("Priority");
+        pPriority.setCellValueFactory(new PropertyValueFactory<>("burstTime"));
+        processInputTable.getColumns().addAll(Arrays.asList(pName, pArrivalTime, pBurstTime, pPriority));
         processInputTable.setMaxHeight(300);
-        pName.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.33));
-        pArrivalTime.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.33));
-        pBurstTime.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.33));
+        pName.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.25));
+        pArrivalTime.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.25));
+        pBurstTime.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.25));
+        pPriority.prefWidthProperty().bind(processInputTable.widthProperty().multiply(0.25));
 
         GridPane processInputPane = new GridPane();
         TextField arrivalTimeField = new TextField();
         TextField burstTimeField = new TextField();
+        TextField priorityField = new TextField();
         Button btEnterProcess = new Button("ENTER PROCESS");
         Button btStartScheduling = new Button("START SCHEDULING");
         Label inputMessageLabel = new Label();
@@ -64,6 +67,8 @@ public class RoundRobinMenu extends Application{
         processInputPane.add(arrivalTimeField, 1, 0);
         processInputPane.add(new Text("Burst Time of Process"), 0, 1);
         processInputPane.add(burstTimeField, 1, 1);
+        processInputPane.add(new Text("Priority of Process"), 0, 2);
+        processInputPane.add(priorityField, 1, 2);
         processInputPane.add(btEnterProcess, 0, 3);
         processInputPane.add(btStartScheduling, 1, 3);
         processInputPane.add(inputMessageLabel, 1, 4);
@@ -136,12 +141,14 @@ public class RoundRobinMenu extends Application{
                 }
                 Integer arrivalTime = Integer.valueOf(arrivalTimeField.getText());
                 Integer burstTime = Integer.valueOf(burstTimeField.getText());
-                Process newProcess = new Process(processCount, arrivalTime, burstTime,0);
+                Integer priority = Integer.valueOf(priorityField.getText());
+                Process newProcess = new Process(processCount, arrivalTime, burstTime, priority);
                 processList.add(newProcess);
                 processInputTable.getItems().add(newProcess);
                 inputMessageLabel.setText("");
                 arrivalTimeField.setText("");
-                burstTimeField.setText("");  
+                burstTimeField.setText(""); 
+                priorityField.setText(""); 
                 processCount += 1;   
             }
             catch (NumberFormatException ex){
