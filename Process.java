@@ -92,10 +92,10 @@ public class Process implements Comparable<Process>{
         this.waitingTime = this.turnaroundTime - this.burstTime;
     }
 
-    @Override
+     @Override
     public int compareTo(Process compareProcess){
         if(this.onHoldTime - compareProcess.getOnHoldTime() == 0){
-            if(this.burstTime == this.remainingBurstTime)
+            if(this.burstTime == this.remainingBurstTime  && compareProcess.burstTime == compareProcess.remainingBurstTime)
                 return this.priority - compareProcess.getPriority();
             else
                 return compareProcess.getArrivalTime() - this.arrivalTime;
